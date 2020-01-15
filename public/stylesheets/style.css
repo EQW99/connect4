@@ -1,8 +1,148 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans:400,700&display=swap');
+
+:root {
+  --lightblue: #3498db;
+  --darkblue: #174360;
+  --blue: hsl(204, 64%, 44%);
+  --red: hsl(360, 82%, 63%);
+  --yellow: hsl(48, 89%, 50%);
+  font-family: 'Encode Sans', sans-serif;
+  font-weight: 600;
+  color: var(--blue);
+  
+}
+a:visited {
+  color: var(--blue);
 }
 
-a {
-  color: #00B7FF;
+html {
+  height: 100%;
+}
+body {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 1fr;
+  height: 100%;
+  margin: 0;
+}
+
+#container {
+  grid-column-start: 2;
+  display: grid;
+}
+
+#container>div {
+  margin: auto;
+}
+
+#title {
+  font-size: 7em;
+}
+
+.button {
+  background-color: var(--blue);
+  border: none;
+  color: white!important;
+  padding: 20px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 3em;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: hsl(204, 64%, 40%);
+}
+
+#stats {
+  	font-size: 2em;
+}
+
+.stat {
+  margin: auto 20px auto 20px;
+  display: inline-block;
+}
+
+#frame {
+  background: var(--lightblue);
+  margin-top: 60px!important;
+  border-radius: 1em;
+  padding: 0 15px;
+}
+
+#bar {
+  background: var(--darkblue);
+  width: calc(100% + 30px);
+  position: relative;
+  right: 15px;
+  height: 50px;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--blue);
+  padding: 0 30px;
+  margin: auto;
+}
+
+.col:hover {
+  background: hsl(204, 64%, 40%);
+  cursor: pointer;
+}
+
+.disc {
+  background: radial-gradient(circle, white 31px, transparent 32px, transparent) center/64px;
+  width: 64px;
+  height: 64px;
+  margin: 15px;
+}
+
+.yellow {
+  background: radial-gradient(circle, var(--yellow) 31px, transparent 32px, transparent) center/64px;
+}
+
+.red {
+  background: radial-gradient(circle, var(--red) 31px, transparent 32px, transparent) center/64px;
+}
+
+#leave {
+  font-size: 2em;
+  text-decoration: none;
+  margin: 20px;
+  position: absolute;
+}
+
+#game-data {
+  background: white;
+  width: calc(100% + 30px);
+  position: relative;
+  right: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#game-data div div {
+  display: inline-block;
+  font-size: 2em;
+  vertical-align: middle;
+}
+
+#arrow {
+  font-size: 4.5em!important;
+  margin: auto;
+}
+
+.result {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  font-size: 4em;
+  margin: auto;
+  display: none;
+}
+
+#lost {
+  color: var(--red);
 }

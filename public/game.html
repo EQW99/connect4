@@ -3,87 +3,98 @@
     <head>
         <meta charset="utf-8">
         <title>Connect 4</title>
-        <link rel="stylesheet" type="text/css" href="./css/styles.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
     </head>
-    <body>
-        <header>
-            <p class="leave"><a href="index.html">&#8592; Leave</a></p>
-        </header>
-
-        <div class="game-box">
-            <div class="col" id="col-1">
-                <div class="col-item" id="disc-1"></div>
-                <div class="col-item" id="disc-2"></div>
-                <div class="col-item" id="disc-3"></div>
-                <div class="col-item" id="disc-4"></div>
-                <div class="col-item" id="disc-5"></div>
-                <div class="col-item" id="disc-6"></div>
-                <div class="col-item" id="disc-7"></div>
-            </div>
-            <div class="col" id="col-2">
-                <div class="col-item" id="disc-1"></div>
-                <div class="col-item" id="disc-2"></div>
-                <div class="col-item" id="disc-3"></div>
-                <div class="col-item" id="disc-4"></div>
-                <div class="col-item" id="disc-5"></div>
-                <div class="col-item" id="disc-6"></div>
-                <div class="col-item" id="disc-7"></div>
-            </div>
-            <div class="col" id="col-3">
-                <div class="col-item" id="disc-1"></div>
-                <div class="col-item" id="disc-2"></div>
-                <div class="col-item" id="disc-3"></div>
-                <div class="col-item" id="disc-4"></div>
-                <div class="col-item" id="disc-5"></div>
-                <div class="col-item" id="disc-6"></div>
-                <div class="col-item" id="disc-7"></div>
-            </div>
-            <div class="col" id="col-4">
-                <div class="col-item" id="disc-1"></div>
-                <div class="col-item" id="disc-2"></div>
-                <div class="col-item" id="disc-3"></div>
-                <div class="col-item" id="disc-4"></div>
-                <div class="col-item" id="disc-5"></div>
-                <div class="col-item" id="disc-6"></div>
-                <div class="col-item" id="disc-7"></div>
-            </div>
-            <div class="col" id="col-5">
-                <div class="col-item" id="disc-1"></div>
-                <div class="col-item" id="disc-2"></div>
-                <div class="col-item" id="disc-3"></div>
-                <div class="col-item" id="disc-4"></div>
-                <div class="col-item" id="disc-5"></div>
-                <div class="col-item" id="disc-6"></div>
-                <div class="col-item" id="disc-7"></div>
-            </div>
-            <div class="col" id="col-6">
-                <div class="col-item" id="disc-1"></div>
-                <div class="col-item" id="disc-2"></div>
-                <div class="col-item" id="disc-3"></div>
-                <div class="col-item" id="disc-4"></div>
-                <div class="col-item" id="disc-5"></div>
-                <div class="col-item" id="disc-6"></div>
-                <div class="col-item" id="disc-7"></div>
-            </div>
-			<div class="col" id="col-7">
-                <div class="col-item" id="disc-1"></div>
-                <div class="col-item" id="disc-2"></div>
-                <div class="col-item" id="disc-3"></div>
-                <div class="col-item" id="disc-4"></div>
-                <div class="col-item" id="disc-5"></div>
-                <div class="col-item" id="disc-6"></div>
-                <div class="col-item" id="disc-7"></div>
-            </div>
+    <body> 
+        <div id="menu">
+            <a id="leave" href="index.html">&#129136; Leave</a>
         </div>
 
-        <footer>
-            <div class="game-data">
-                <div class="yellow-ball"><img></div>
-                <div class="you"><p>You</p></div>
-                <div class="arrow"><p>&rarr;</p></div>
-                <div class="red-ball"><img></div>
-                <div class="opponent"><p>Opponent</p></div>
+        <div id="container">
+            <div id="frame">
+                <div id="board">
+                    <div class="col" id="col-1">
+                        <div class="disc" id="disc-1"></div>
+                        <div class="disc" id="disc-2"></div>
+                        <div class="disc" id="disc-3"></div>
+                        <div class="disc" id="disc-4"></div>
+                        <div class="disc" id="disc-5"></div>
+                        <div class="disc" id="disc-6"></div>
+                        
+                    </div>
+                    <div class="col" id="col-2">
+                        <div class="disc" id="disc-1"></div>
+                        <div class="disc" id="disc-2"></div>
+                        <div class="disc" id="disc-3"></div>
+                        <div class="disc" id="disc-4"></div>
+                        <div class="disc" id="disc-5"></div>
+                        <div class="disc" id="disc-6"></div>
+                        
+                    </div>
+                    <div class="col" id="col-3">
+                        <div class="disc" id="disc-1"></div>
+                        <div class="disc" id="disc-2"></div>
+                        <div class="disc" id="disc-3"></div>
+                        <div class="disc" id="disc-4"></div>
+                        <div class="disc" id="disc-5"></div>
+                        <div class="disc" id="disc-6"></div>
+                        
+                    </div>
+                    <div class="col" id="col-4">
+                        <div class="disc" id="disc-1"></div>
+                        <div class="disc" id="disc-2"></div>
+                        <div class="disc" id="disc-3"></div>
+                        <div class="disc" id="disc-4"></div>
+                        <div class="disc" id="disc-5"></div>
+                        <div class="disc" id="disc-6"></div>
+                        
+                    </div>
+                    <div class="col" id="col-5">
+                        <div class="disc" id="disc-1"></div>
+                        <div class="disc" id="disc-2"></div>
+                        <div class="disc" id="disc-3"></div>
+                        <div class="disc" id="disc-4"></div>
+                        <div class="disc" id="disc-5"></div>
+                        <div class="disc" id="disc-6"></div>
+                        
+                    </div>
+                    <div class="col" id="col-6">
+                        <div class="disc" id="disc-1"></div>
+                        <div class="disc" id="disc-2"></div>
+                        <div class="disc" id="disc-3"></div>
+                        <div class="disc" id="disc-4"></div>
+                        <div class="disc" id="disc-5"></div>
+                        <div class="disc" id="disc-6"></div>
+                        
+                    </div>
+                    <div class="col" id="col-7">
+                        <div class="disc" id="disc-1"></div>
+                        <div class="disc" id="disc-2"></div>
+                        <div class="disc" id="disc-3"></div>
+                        <div class="disc" id="disc-4"></div>
+                        <div class="disc" id="disc-5"></div>
+                        <div class="disc" id="disc-6"></div>
+                        
+                    </div>
+                </div>
+                <div id="bar"></div>
+
+                <div id="game-data">
+                    <div>
+                        <div class="disc yellow"></div>
+                        <div class="name">You</div>
+                    </div>
+                    <div id="arrow">&#129092;</div> <!-- left arrow: &#129092;   right arrow: &#129094;-->
+                    <div>
+                        <div class="disc red"></div>
+                        <div class="name">Opponent</div>
+                    </div>
+                    <div class="result" id="win">YOU WIN!</div>
+                    <div class="result" id="lost">YOU LOST :(</div>
+                </div>
+
             </div>
-        </footer>
+
+        </div>
     </body>
 </html>
