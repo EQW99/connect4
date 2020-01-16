@@ -4,4 +4,5 @@ TO-DO:
 - responsive size (media queries) & too small notification
 - Stats
 - Cookies
-- Win Algorithm
+- Win Algorithm? (save 4 discs)
+- auto clean up websockets object
