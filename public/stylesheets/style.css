@@ -65,6 +65,15 @@ body {
   display: inline-block;
 }
 
+#invalidWarning {
+  margin: auto;
+  font-size: 2em;
+  color: var(--red);
+  position: absolute;
+  padding: 0 25%;
+  display: none;
+}
+
 #frame {
   background: var(--lightblue);
   margin-top: 60px!important;
@@ -88,7 +97,7 @@ body {
   margin: auto;
 }
 
-.col:hover {
+.col.enabled:hover {
   background: hsl(204, 64%, 40%);
   cursor: pointer;
 }
@@ -104,15 +113,27 @@ body {
   background: radial-gradient(circle, var(--yellow) 31px, transparent 32px, transparent) center/64px;
 }
 
+.yellowWin {
+  background: radial-gradient(circle, var(--yellow) 27px, green 28px, green 31px, transparent 32px, transparent) center/64px!important;
+}
+
 .red {
   background: radial-gradient(circle, var(--red) 31px, transparent 32px, transparent) center/64px;
 }
 
-#leave {
+.redWin {
+  background: radial-gradient(circle, var(--red) 27px, green 28px, green 31px, transparent 32px, transparent) center/64px!important;
+}
+
+.leave {
   font-size: 2em;
   text-decoration: none;
   margin: 20px;
   position: absolute;
+}
+
+.leave:hover {
+  color: hsl(204, 64%, 40%);
 }
 
 #game-data {
@@ -143,6 +164,50 @@ body {
   display: none;
 }
 
-#lost {
+#lost, #opponentDisconnect {
   color: var(--red);
+}
+
+#queuePopup {
+  display: none;
+  position: absolute;
+  padding: 20px;
+  width: 280px;
+  left: 50%;
+  margin-left: -140px!important;
+  height: 180px;
+  top: 40%;
+  margin-top: -90px!important;
+  z-index: 20;
+  border-radius: 0.5rem;
+  color: var(--darkblue);
+}
+
+#queuePopup .leave {
+  margin: 20px 0!important;
+  font-size: 1.5em;
+}
+
+#queuePopup:after {
+  position: fixed;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: -2;
+}
+
+#queuePopup:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: white;
+  z-index: -1;
+  border-radius: 0.5rem;
+
 }

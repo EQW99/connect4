@@ -7,10 +7,16 @@
     </head>
     <body> 
         <div id="menu">
-            <a id="leave" href="index.html">&#129136; Leave</a>
+            <a class="leave" href="/">&#129136; Leave</a>
         </div>
 
         <div id="container">
+            <div id="queuePopup">
+                <p>You are in queue!</p>
+                <p>Game will start automatically when another player is found!</p>
+                <a class="leave" href="/">Leave</a>
+              </div>
+            <div id="invalidWarning">Invalid Move!</div>
             <div id="frame">
                 <div id="board">
                     <div class="col" id="col-1">
@@ -81,20 +87,25 @@
 
                 <div id="game-data">
                     <div>
-                        <div class="disc yellow"></div>
+                        <div id="youColour" class="disc yellow"></div>
                         <div class="name">You</div>
                     </div>
-                    <div id="arrow">&#129092;</div> <!-- left arrow: &#129092;   right arrow: &#129094;-->
+                    <div id="arrow">&#129094;</div> <!-- left arrow: &#129092;   right arrow: &#129094;-->
                     <div>
-                        <div class="disc red"></div>
+                        <div id="opponentColour" class="disc red"></div>
                         <div class="name">Opponent</div>
                     </div>
+                    <div class="result" id="opponentDisconnect">Opponent Disconnected :(</div>
                     <div class="result" id="win">YOU WIN!</div>
                     <div class="result" id="lost">YOU LOST :(</div>
+                    <div class="result" id="draw">DRAW!?</div>
                 </div>
 
             </div>
 
         </div>
+        <script src="javascripts/ui.js"></script>
+        <script src="javascripts/game.js"></script>
+        <script src="javascripts/messages.js"></script>
     </body>
 </html>
