@@ -47,7 +47,225 @@ var game = function(p1, p2, id) {
 
     this.checkWin = function(socket) {
         let win = false;
+   
+        for (var i = 0; i<7; i++) {
+            let current = this.board[i][0];
+            let counter = 1;
+            for (var j = 1; j<6; j++) {
+                if (current === this.board[i][j] && current != "") {
+                    counter++;
+                } else {
+                    current = this.board[i][j];
+                    counter = 1;
+                }
 
+
+                if (counter === 4) {
+                    win = true;
+                }
+            }
+        }
+        for (var i = 0; i<6; i++) {
+            let current = this.board[0][i];
+            let counter = 1;
+            for (var j = 1; j<7; j++) {
+                if (current === this.board[j][i] && current != "") {
+                    counter++;
+                } else {
+                    current = this.board[j][i];
+                    counter = 1;
+                }
+                if (counter === 4) {
+                    win = true;
+                }
+            }
+        }
+
+        var j = 2;
+        var current = this.board[0][3];
+        var count = 1;
+        for (var i = 1; i<3; i++) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j--;
+        }
+        //
+        var j = 3;
+        var current = this.board[0][4];
+        var count = 1;
+        for (var i = 1; i<4; i++) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j--;
+        }
+        //
+        var j = 4;
+        var current = this.board[0][5];
+        var count = 1;
+        for (var i = 1; i<7; i++) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j--;
+        }
+        // 
+        var j = 4;
+        var current = this.board[1][5];
+        var count = 1;
+        for (var i = 2; i<7; i++) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j--;
+        }
+        //
+        var j = 1;
+        var current = this.board[2][0];
+        var count = 1;
+        for (var i = 3; i<7; i++) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j++;
+        }
+        //
+        var j = 1;
+        var current = this.board[3][0];
+        var count = 1;
+        for (var i = 4; i<7; i++) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j++;
+        }
+        var j = 2;
+        var current = this.board[6][3];
+        var count = 1;
+        for (var i = 5; i>2; i--) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j--;
+        }
+        var j = 3;
+        var current = this.board[6][4];
+        var count = 1;
+        for (var i = 5; i>2; i--) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j--;
+        }
+        var j = 4;
+        var current = this.board[6][5];
+        var count = 1;
+        for (var i = 5; i>0; i--) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j--;
+        }
+        var j = 4;
+        var current = this.board[5][5];
+        var count = 1;
+        for (var i = 4; i>-1; i--) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j--;
+        }
+        var j = 4;
+        var current = this.board[4][5];
+        var count = 1;
+        for (var i = 3; i<-1; i--) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j--;
+        }
+        var j = 4;
+        var current = this.board[3][5];
+        var count = 1;
+        for (var i = 2; i<-1; i--) {
+            if (current === this.board[i][j] && current != "") {
+                count++;
+            } else {
+                count = 1;
+                current = this.board[i][j];
+            }
+            if (count == 4) {
+                win = true;
+            }
+            j--;
+        }
         if (win) {
             let loser = this.p1;
             if (socket == p1) {
