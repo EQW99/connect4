@@ -275,6 +275,7 @@ var game = function(p1, p2, id) {
             loser.send(JSON.stringify({message: 'gameEnd', winner: false, disconnected: false}));
             this.p1.close();
             this.p2.close();
+            this.ended = true;
         }
         else {
             let other = this.p1;

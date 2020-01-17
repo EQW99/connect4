@@ -19,11 +19,13 @@ socket.onmessage = function(m) {
     else if (e == "moveMade") {
         console.log("moveMade");
         game.updateBoard(event.board);
+        playPingSound();
     }
 
     else if (e == "invalidMove") {
         console.log("invalidMove");
         showInvalidMoveWarning();
+        playErrorSound();
     }
 
     else if (e == "switchTurn") {
@@ -36,7 +38,7 @@ socket.onmessage = function(m) {
             disableBoard();
         }
     
-        let gameData = document.querySelector("#game-data div");
+        let gameData = document.querySelectorAll("#game-data>div");
         for (i=0; i<3; i++) {
             gameData[i].style.display = "none";
         }

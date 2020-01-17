@@ -3,7 +3,7 @@ function closePopup() {
 }
 
 function openPopup() {
-    document.getElementById("queuePopup").style.display = "block";
+    document.getElementById("queuePopup").style.opacity = 100;
 }
 
 function disableBoard() {
@@ -33,6 +33,14 @@ function setColour(colour) {
 
 function showInvalidMoveWarning() {
     document.getElementById("invalidWarning").style.display = "block";
+}
+
+function playPingSound() {
+    document.getElementById("ping").play();
+}
+
+function playErrorSound() {
+    document.getElementById("error").play();
 }
 
 function renderBoard(board) {

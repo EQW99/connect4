@@ -1,0 +1,37 @@
+#title {
+    font-size: 7em;
+  }
+  
+.button {
+    position: relative;
+    background-color: var(--blue);
+    border: none;
+    color: white!important;
+    padding: 20px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 3em;
+    border-radius: 0.2em;
+    cursor: pointer;
+    transition: transform ease 0.3s;
+}
+
+.button:hover {
+    background-color: hsl(204, 64%, 40%);
+    transform: scale(1.05);
+}
+
+#stats {
+    font-size: 2em;
+}
+
+.stat {
+    margin: auto 20px auto 20px;
+    display: inline-block;
+}
+
+.stat::after {
+    content: attr(data-stat);
+    position: static;
+}

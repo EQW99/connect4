@@ -23,6 +23,19 @@ var connectionID = 0;
 var gameID = 0;
 var gameQueue = [];
 
+// regularly clean websockets object
+setInterval(function() {
+    for (let i in websockets) {
+      if (Object.prototype.hasOwnProperty.call(websockets,i)) {
+        let gameObj = websockets[i];
+        //if the gameObj has a final status, the game is complete/aborted
+        if (gameObj.ended) {
+          delete websockets[i];
+        }
+      }
+    }
+  }, 50000);
+
 wss.on("connection", function connection(ws) {
     let con = ws;
     con.id = connectionID++;
@@ -54,16 +67,23 @@ wss.on("connection", function connection(ws) {
 
 
     ws.on('close', function close() {
-        let game = websockets[ws.id];
-        let other = game.p1;
-        if (ws == game.p1) {
-            other = game.p2;
-        }
+        if (websockets[ws.id]!=null) {
+            let game = websockets[ws.id];
+            let other = game.p1;
+            if (ws == game.p1) {
+                other = game.p2;
+            }
 
-        if (!game.ended) {
-            other.send(JSON.stringify({message: 'gameEnd', winner: false, disconnected: true}));
+            if (!game.ended) {
+                other.send(JSON.stringify({message: 'gameEnd', winner: false, disconnected: true}));
+                game.ended = true;
+            }
+            other.close();
         }
-        other.close();
+        else { // left queue
+            gameQueue.shift(); // remove socket from queue
+
+        }
     });
 
 
