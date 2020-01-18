@@ -146,3 +146,30 @@
     border-radius: 0.5rem;
 
 }
+
+.fullscreen {
+    font-size: 1em;
+    padding: 10px 10px;
+    position: absolute;
+    margin: 20px;
+    transition: none;
+}
+
+.fullscreen:hover {
+    transform: none;
+}
+
+.fullscreen:fullscreen  { /* doesnt seem to work*/
+    background-color: var(--red)!important;
+}
+
+#timer {
+    position: absolute;
+    margin: 150px 20px;
+    font-size: 1.3em;
+}
+
+#time {
+    color: var(--darkblue);
+    font-size: 2em;
+}

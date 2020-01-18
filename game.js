@@ -1,10 +1,11 @@
 //@ts-check
-var game = function(p1, p2, id) {
+var game = function(p1, p2, id, appStats) {
     this.board = [];
     this.p1 = p1;
     this.p2 = p2;
     this.id = id;
     this.ended = false;
+    this.appStats = appStats;
 
     for (let i = 0; i < 7; i++) {
         this.board[i] = [];
@@ -276,6 +277,7 @@ var game = function(p1, p2, id) {
             this.p1.close();
             this.p2.close();
             this.ended = true;
+            this.appStats.liveGames--;
         }
         else {
             let other = this.p1;

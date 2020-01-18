@@ -4,6 +4,7 @@ var indexRouter = require("./routes/index");
 var websocket = require("ws");
 
 var Game = require("./game");
+var stats = require("./statTracker");
 
 var port = process.argv[2];
 var app = express();
@@ -13,8 +14,17 @@ const wss = new websocket.Server({ server });
 
 
 app.use(express.static(__dirname + "/public"));
-app.get("/", indexRouter);
+app.set('view engine', 'ejs')
 app.get("/play", indexRouter);
+
+/* GET splash page */
+app.get("/", function(req, res) {
+    res.render("splash.ejs", {
+      playersOnline: stats.playersOnline,
+      liveGames: stats.liveGames,
+      totalGames: stats.totalGames
+    });
+  });
 
 
 
@@ -39,16 +49,19 @@ setInterval(function() {
 wss.on("connection", function connection(ws) {
     let con = ws;
     con.id = connectionID++;
+    stats.playersOnline++;
 
     if (gameQueue.length == 1) {
         let p1 = con;
         let p2 = gameQueue.shift();
-        let game = new Game(p1, p2, gameID++);
+        let game = new Game(p1, p2, gameID++, stats);
         websockets[p1.id] = game;
         websockets[p2.id] = game;
         let p1Starts = Math.random() >= 0.5; // random boolean
         p1.send(JSON.stringify({message: 'gameStarted', myTurn: p1Starts, colour: "yellow"}));
         p2.send(JSON.stringify({message: 'gameStarted', myTurn: !p1Starts, colour: "red"}));
+        stats.liveGames++;
+        stats.totalGames++;
     }
     else { // queue length = 0
         gameQueue.push(con);
@@ -67,7 +80,8 @@ wss.on("connection", function connection(ws) {
 
 
     ws.on('close', function close() {
-        if (websockets[ws.id]!=null) {
+        stats.playersOnline--;
+        if (websockets[ws.id]!=null) { // if socket in game
             let game = websockets[ws.id];
             let other = game.p1;
             if (ws == game.p1) {
@@ -77,6 +91,7 @@ wss.on("connection", function connection(ws) {
             if (!game.ended) {
                 other.send(JSON.stringify({message: 'gameEnd', winner: false, disconnected: true}));
                 game.ended = true;
+                stats.liveGames--;
             }
             other.close();
         }

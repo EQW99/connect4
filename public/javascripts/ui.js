@@ -31,6 +31,15 @@ function setColour(colour) {
     }
 }
 
+document.getElementsByClassName("fullscreen")[0].addEventListener("click", function() {
+    if (!document.fullscreen) {
+        document.documentElement.requestFullscreen();
+    }
+    else {
+        document.exitFullscreen();
+    }
+})
+
 function showInvalidMoveWarning() {
     document.getElementById("invalidWarning").style.display = "block";
 }
@@ -41,6 +50,29 @@ function playPingSound() {
 
 function playErrorSound() {
     document.getElementById("error").play();
+}
+
+var timeout;
+let seconds = 0;
+let minutes = 0;
+
+function addTime() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+    }
+    let time = (minutes > 9 ? minutes : "0" + minutes) + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    document.getElementById("time").innerHTML = time;
+    startTimer();
+}
+
+function startTimer() {
+    timeout = setTimeout(addTime, 1000);
+}
+
+function stopTimer() {
+    clearTimeout(timeout);
 }
 
 function renderBoard(board) {

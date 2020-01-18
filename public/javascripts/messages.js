@@ -14,6 +14,10 @@ socket.onmessage = function(m) {
         setColour(event.colour);
         game.start(event.myTurn);
         closePopup();
+        var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        cookieValue++
+        document.cookie = "games="+cookieValue+";path=/"
+        startTimer();
     }
 
     else if (e == "moveMade") {
@@ -34,6 +38,8 @@ socket.onmessage = function(m) {
     }
 
     else if (e == "gameEnd") {
+        stopTimer();
+        
         if (game.myTurn) {
             disableBoard();
         }

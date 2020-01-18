@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Connect 4</title>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/splash.css">
+    </head>
+    <body>
+        <div id="cookieInfo"></div>
+        <div id="container">
+            <div>
+                <div id="title">CONNECT 4</div>
+            </div>
+            <div>
+                <a class="button" href="/play">PLAY &#129138;</a>
+            </div>
+            <div id="stats">
+                <div class="stat" data-stat="<%= playersOnline %>">Online: </div>
+                <div class="stat" data-stat="<%= liveGames %>">Live Games: </div>
+                <div class="stat" data-stat="<%= totalGames %>">Total Games: </div>
+            </div>
+        </div>
+        <script src="javascripts/cookie.js"></script>
+    </body>
+</html>
