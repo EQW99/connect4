@@ -159,7 +159,7 @@
     transform: none;
 }
 
-.fullscreen:fullscreen  { /* doesnt seem to work*/
+:fullscreen .fullscreen  { /* doesnt seem to work*/
     background-color: var(--red)!important;
 }
 
