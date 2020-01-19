@@ -48,10 +48,12 @@ var game = function(p1, p2, id, appStats) {
 
     this.checkWin = function(socket) {
         let win = false;
-        let winDisc1 = [];
-        let winDisc2 = [];
-        let winDisc3 = [];
-        let winDisc4 = [];
+        let winDiscs = {
+            d1: [],
+            d2: [],
+            d3: [],
+            d4: []
+        }
         for (var i = 0; i<7 && win === false; i++) {
             let current = this.board[i][0];
             let counter = 1;
@@ -66,14 +68,14 @@ var game = function(p1, p2, id, appStats) {
 
                 if (counter === 4) {
                     win = true;
-                    winDisc1.push(i); // col
-                    winDisc1.push(j); // row
-                    winDisc2.push(i); // col
-                    winDisc2.push(j-1); // row
-                    winDisc3.push(i); // col
-                    winDisc3.push(j-2); // row
-                    winDisc4.push(i); // col
-                    winDisc4.push(j-3); // row
+                    winDiscs.d1.push(i); // col
+                    winDiscs.d1.push(j); // row
+                    winDiscs.d2.push(i); // col
+                    winDiscs.d2.push(j-1); // row
+                    winDiscs.d3.push(i); // col
+                    winDiscs.d3.push(j-2); // row
+                    winDiscs.d4.push(i); // col
+                    winDiscs.d4.push(j-3); // row
 
                 }
             }
@@ -90,14 +92,14 @@ var game = function(p1, p2, id, appStats) {
                 }
                 if (counter === 4) {
                     win = true;
-                    winDisc1.push(i); 
-                    winDisc1.push(j); 
-                    winDisc2.push(i); 
-                    winDisc2.push(j-1);
-                    winDisc3.push(i); 
-                    winDisc3.push(j-2);
-                    winDisc4.push(i); 
-                    winDisc4.push(j-3);
+                    winDiscs.d1.push(i); 
+                    winDiscs.d1.push(j); 
+                    winDiscs.d2.push(i); 
+                    winDiscs.d2.push(j-1);
+                    winDiscs.d3.push(i); 
+                    winDiscs.d3.push(j-2);
+                    winDiscs.d4.push(i); 
+                    winDiscs.d4.push(j-3);
                     
 
                 }
@@ -120,14 +122,14 @@ var game = function(p1, p2, id, appStats) {
                     }
                     if (counter === 4) {
                         win = true;
-                        winDisc1.push(sum); 
-                        winDisc1.push(sum2); 
-                        winDisc2.push(sum-1); 
-                        winDisc2.push(sum2-1);
-                        winDisc3.push(sum-2); 
-                        winDisc3.push(sum2-2);
-                        winDisc4.push(sum-3); 
-                        winDisc4.push(sum2-3);
+                        winDiscs.d1.push(sum); 
+                        winDiscs.d1.push(sum2); 
+                        winDiscs.d2.push(sum-1); 
+                        winDiscs.d2.push(sum2-1);
+                        winDiscs.d3.push(sum-2); 
+                        winDiscs.d3.push(sum2-2);
+                        winDiscs.d4.push(sum-3); 
+                        winDiscs.d4.push(sum2-3);
                         
                         
                         // record winning discs
@@ -151,14 +153,14 @@ var game = function(p1, p2, id, appStats) {
                     if (counter === 4) {
                         win = true;
                         // record winning discs
-                        winDisc1.push(i-delta); 
-                        winDisc1.push(j+delta); 
-                        winDisc2.push(i-delta+1); 
-                        winDisc2.push(j+delta-1);
-                        winDisc3.push(i-delta+2); 
-                        winDisc3.push(j+delta-2);
-                        winDisc4.push(i-delta+3); 
-                        winDisc4.push(j+delta-3);
+                        winDiscs.d1.push(i-delta); 
+                        winDiscs.d1.push(j+delta); 
+                        winDiscs.d2.push(i-delta+1); 
+                        winDiscs.d2.push(j+delta-1);
+                        winDiscs.d3.push(i-delta+2); 
+                        winDiscs.d3.push(j+delta-2);
+                        winDiscs.d4.push(i-delta+3); 
+                        winDiscs.d4.push(j+delta-3);
                         
                     }
                 }
@@ -166,14 +168,18 @@ var game = function(p1, p2, id, appStats) {
         }
         
         if (win) {
-            // for winDiscs1-4, [0] contains the colummn, [1] contains the row
-  
+            // for winDiscss.d1-d4, [0] contains the colummn, [1] contains the row
+            this.board[winDiscs["d1"][0]][winDiscs["d1"][1]] += "Win";
+            this.board[winDiscs["d2"][0]][winDiscs["d2"][1]] += "Win";
+            this.board[winDiscs["d3"][0]][winDiscs["d3"][1]] += "Win";
+            this.board[winDiscs["d4"][0]][winDiscs["d4"][1]] += "Win";
+
             let loser = this.p1;
             if (socket == p1) {
                 loser = this.p2;
             }
-            socket.send(JSON.stringify({message: 'gameEnd', winner: true, disconnected: false}));
-            loser.send(JSON.stringify({message: 'gameEnd', winner: false, disconnected: false}));
+            socket.send(JSON.stringify({message: 'gameEnd', winner: true, disconnected: false, board: this.board}));
+            loser.send(JSON.stringify({message: 'gameEnd', winner: false, disconnected: false, board: this.board}));
             this.p1.close();
             this.p2.close();
             this.ended = true;

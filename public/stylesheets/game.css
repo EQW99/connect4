@@ -47,7 +47,7 @@
 }
 
 .yellowWin {
-    background: radial-gradient(circle, var(--yellow) 27px, green 28px, green 31px, transparent 32px, transparent) center/64px !important;
+    background: radial-gradient(circle, var(--yellow) 27px, #24ff2b 28px, #24ff2b 31px, transparent 32px, transparent) center/64px !important;
 }
 
 .red {
@@ -55,7 +55,7 @@
 }
 
 .redWin {
-    background: radial-gradient(circle, var(--red) 27px, green 28px, green 31px, transparent 32px, transparent) center/64px !important;
+    background: radial-gradient(circle, var(--red) 27px, #24ff2b 28px, #24ff2b 31px, transparent 32px, transparent) center/64px !important;
 }
 
 .leave {
@@ -159,7 +159,7 @@
     transform: none;
 }
 
-:fullscreen .fullscreen  { /* doesnt seem to work*/
+:fullscreen .fullscreen  {
     background-color: var(--red)!important;
 }
 

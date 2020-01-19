@@ -14,9 +14,9 @@ socket.onmessage = function(m) {
         setColour(event.colour);
         game.start(event.myTurn);
         closePopup();
-        var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-        cookieValue++
-        document.cookie = "games="+cookieValue+";path=/"
+        var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)games\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        cookieValue++;
+        document.cookie = "games="+cookieValue+";path=/";
         startTimer();
     }
 
@@ -39,6 +39,7 @@ socket.onmessage = function(m) {
 
     else if (e == "gameEnd") {
         stopTimer();
+        game.updateBoard(event.board);
         
         if (game.myTurn) {
             disableBoard();
