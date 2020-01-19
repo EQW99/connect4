@@ -48,11 +48,14 @@ var game = function(p1, p2, id, appStats) {
 
     this.checkWin = function(socket) {
         let win = false;
-   
-        for (var i = 0; i<7; i++) {
+        let winDisc1 = [];
+        let winDisc2 = [];
+        let winDisc3 = [];
+        let winDisc4 = [];
+        for (var i = 0; i<7 && win === false; i++) {
             let current = this.board[i][0];
             let counter = 1;
-            for (var j = 1; j<6; j++) {
+            for (var j = 1; j<6 && win === false; j++) {
                 if (current === this.board[i][j] && current != "") {
                     counter++;
                 } else {
@@ -63,13 +66,22 @@ var game = function(p1, p2, id, appStats) {
 
                 if (counter === 4) {
                     win = true;
+                    winDisc1.push(i); // col
+                    winDisc1.push(j); // row
+                    winDisc2.push(i); // col
+                    winDisc2.push(j-1); // row
+                    winDisc3.push(i); // col
+                    winDisc3.push(j-2); // row
+                    winDisc4.push(i); // col
+                    winDisc4.push(j-3); // row
+
                 }
             }
         }
-        for (var i = 0; i<6; i++) {
+        for (var i = 0; i<6 && win === false; i++) {
             let current = this.board[0][i];
             let counter = 1;
-            for (var j = 1; j<7; j++) {
+            for (var j = 1; j<7 && win === false; j++) {
                 if (current === this.board[j][i] && current != "") {
                     counter++;
                 } else {
@@ -78,196 +90,84 @@ var game = function(p1, p2, id, appStats) {
                 }
                 if (counter === 4) {
                     win = true;
+                    winDisc1.push(i); 
+                    winDisc1.push(j); 
+                    winDisc2.push(i); 
+                    winDisc2.push(j-1);
+                    winDisc3.push(i); 
+                    winDisc3.push(j-2);
+                    winDisc4.push(i); 
+                    winDisc4.push(j-3);
+                    
+
                 }
             }
         }
+        
 
-        var j = 2;
-        var current = this.board[0][3];
-        var count = 1;
-        for (var i = 1; i<3; i++) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
+        for (var i = 0; i<7 && win === false; i++) {
+            for (var j = 0; j<6 && win === false; j++) {
+                var counter = 1;
+                let current = this.board[i][j];
+                for (var delta = 1; delta<(6-j) && delta<(7-i) && win === false; delta++) {
+                    let sum = i + delta;
+                    let sum2 = j + delta;
+                    if (current === this.board[sum][sum2] && current != "") {
+                        counter++;
+                    } else {
+                        current = this.board[sum][sum2];
+                        counter = 1;
+                    }
+                    if (counter === 4) {
+                        win = true;
+                        winDisc1.push(sum); 
+                        winDisc1.push(sum2); 
+                        winDisc2.push(sum-1); 
+                        winDisc2.push(sum2-1);
+                        winDisc3.push(sum-2); 
+                        winDisc3.push(sum2-2);
+                        winDisc4.push(sum-3); 
+                        winDisc4.push(sum2-3);
+                        
+                        
+                        // record winning discs
+                    }
+                }
+
             }
-            if (count == 4) {
-                win = true;
-            }
-            j--;
         }
-        //
-        var j = 3;
-        var current = this.board[0][4];
-        var count = 1;
-        for (var i = 1; i<4; i++) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
+        
+        for (var i = 6; i>-1 && win === false; i--) {
+            for (var j = 0; j<6 && win === false; j++) {
+                var counter = 1;
+                let current = this.board[i][j];
+                for (var delta = 1; delta<(6-j) && delta<=i && win === false; delta++) {
+                    if (current === this.board[i - delta][j + delta] && current != "") {
+                        counter++;
+                    } else {
+                        current = this.board[i - delta][j + delta];
+                        counter = 1;
+                    }
+                    if (counter === 4) {
+                        win = true;
+                        // record winning discs
+                        winDisc1.push(i-delta); 
+                        winDisc1.push(j+delta); 
+                        winDisc2.push(i-delta+1); 
+                        winDisc2.push(j+delta-1);
+                        winDisc3.push(i-delta+2); 
+                        winDisc3.push(j+delta-2);
+                        winDisc4.push(i-delta+3); 
+                        winDisc4.push(j+delta-3);
+                        
+                    }
+                }
             }
-            if (count == 4) {
-                win = true;
-            }
-            j--;
         }
-        //
-        var j = 4;
-        var current = this.board[0][5];
-        var count = 1;
-        for (var i = 1; i<7; i++) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
-            }
-            if (count == 4) {
-                win = true;
-            }
-            j--;
-        }
-        // 
-        var j = 4;
-        var current = this.board[1][5];
-        var count = 1;
-        for (var i = 2; i<7; i++) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
-            }
-            if (count == 4) {
-                win = true;
-            }
-            j--;
-        }
-        //
-        var j = 1;
-        var current = this.board[2][0];
-        var count = 1;
-        for (var i = 3; i<7; i++) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
-            }
-            if (count == 4) {
-                win = true;
-            }
-            j++;
-        }
-        //
-        var j = 1;
-        var current = this.board[3][0];
-        var count = 1;
-        for (var i = 4; i<7; i++) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
-            }
-            if (count == 4) {
-                win = true;
-            }
-            j++;
-        }
-        var j = 2;
-        var current = this.board[6][3];
-        var count = 1;
-        for (var i = 5; i>2; i--) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
-            }
-            if (count == 4) {
-                win = true;
-            }
-            j--;
-        }
-        var j = 3;
-        var current = this.board[6][4];
-        var count = 1;
-        for (var i = 5; i>2; i--) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
-            }
-            if (count == 4) {
-                win = true;
-            }
-            j--;
-        }
-        var j = 4;
-        var current = this.board[6][5];
-        var count = 1;
-        for (var i = 5; i>0; i--) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
-            }
-            if (count == 4) {
-                win = true;
-            }
-            j--;
-        }
-        var j = 4;
-        var current = this.board[5][5];
-        var count = 1;
-        for (var i = 4; i>-1; i--) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
-            }
-            if (count == 4) {
-                win = true;
-            }
-            j--;
-        }
-        var j = 4;
-        var current = this.board[4][5];
-        var count = 1;
-        for (var i = 3; i<-1; i--) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
-            }
-            if (count == 4) {
-                win = true;
-            }
-            j--;
-        }
-        var j = 4;
-        var current = this.board[3][5];
-        var count = 1;
-        for (var i = 2; i<-1; i--) {
-            if (current === this.board[i][j] && current != "") {
-                count++;
-            } else {
-                count = 1;
-                current = this.board[i][j];
-            }
-            if (count == 4) {
-                win = true;
-            }
-            j--;
-        }
+        
         if (win) {
+            // for winDiscs1-4, [0] contains the colummn, [1] contains the row
+  
             let loser = this.p1;
             if (socket == p1) {
                 loser = this.p2;
