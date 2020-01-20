@@ -56,10 +56,10 @@ socket.onmessage = function(m) {
         else if (event.winner) {
             document.getElementById("win").style.display = "block";
         }
-        else if (!event.winner) {
+        else if (!event.winner & !event.draw) {
             document.getElementById("lost").style.display = "block";
         }
-        else {
+        else { // event.draw
             document.getElementById("draw").style.display = "block";
         }
     }

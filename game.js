@@ -21,6 +21,15 @@ var game = function(p1, p2, id, appStats) {
         return false;
     }
 
+    this.boardFull = function() {
+        for(let i = 0; i < 7; i++) {
+            if (this.board[i].includes("")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     this.addDisc = function(column, socket) {
         for (let i = 6; i > -1; i--) {
@@ -178,8 +187,16 @@ var game = function(p1, p2, id, appStats) {
             if (socket == p1) {
                 loser = this.p2;
             }
-            socket.send(JSON.stringify({message: 'gameEnd', winner: true, disconnected: false, board: this.board}));
-            loser.send(JSON.stringify({message: 'gameEnd', winner: false, disconnected: false, board: this.board}));
+            socket.send(JSON.stringify({message: 'gameEnd', winner: true, disconnected: false, draw: false, board: this.board}));
+            loser.send(JSON.stringify({message: 'gameEnd', winner: false, disconnected: false, draw: false, board: this.board}));
+            this.p1.close();
+            this.p2.close();
+            this.ended = true;
+            this.appStats.liveGames--;
+        }
+        else if (this.boardFull()) { // draw
+            this.p1.send(JSON.stringify({message: 'gameEnd', winner: false, disconnected: false, draw: true, board: this.board}));
+            this.p2.send(JSON.stringify({message: 'gameEnd', winner: false, disconnected: false, draw: true, board: this.board}));
             this.p1.close();
             this.p2.close();
             this.ended = true;
