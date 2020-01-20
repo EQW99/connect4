@@ -94,12 +94,12 @@ var game = function(p1, p2, id, appStats) {
                     win = true;
                     winDiscs.d1.push(i); 
                     winDiscs.d1.push(j); 
-                    winDiscs.d2.push(i); 
-                    winDiscs.d2.push(j-1);
-                    winDiscs.d3.push(i); 
-                    winDiscs.d3.push(j-2);
-                    winDiscs.d4.push(i); 
-                    winDiscs.d4.push(j-3);
+                    winDiscs.d2.push(i-1); 
+                    winDiscs.d2.push(j);
+                    winDiscs.d3.push(i-2); 
+                    winDiscs.d3.push(j);
+                    winDiscs.d4.push(i-3); 
+                    winDiscs.d4.push(j);
                     
 
                 }
