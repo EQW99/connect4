@@ -1,4 +1,3 @@
-# uni_connect4
+# Connect 4
 
-TO-DO:
-- Deployment
+Uni coursework for Web and Database technology course.
